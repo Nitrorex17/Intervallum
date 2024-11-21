@@ -55,7 +55,7 @@ export default function Home() {
     }
 
     return (
-        <div className="relative w-screen h-screen bg-black">
+        <div className="relative w-screen h-screen bg-white">
             <div className="absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none" style={{ opacity: 1 }}></div>
             <h2 className="absolute top-8 left-8 text-2xl font-bold text-white z-10"> </h2>
             
