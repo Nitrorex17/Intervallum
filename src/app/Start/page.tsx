@@ -50,7 +50,6 @@ export default function Home() {
             setFontSize((prev) => prev - 3.25)
 
             if (clicks == 5) {
-                setShowError(false)
                 setShowEnd(true)
                 setShowButton(false)
             }
@@ -61,7 +60,7 @@ export default function Home() {
         <div className="relative w-screen h-screen bg-black">
             <h2 className="absolute top-8 left-8 text-2xl font-bold text-white z-10"> </h2>
             
-            {showEnd ?? (
+            {showEnd && (
                 <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-5xl text-white font-custom z-20">
                     Welcome to Vallum.
                 </div>
