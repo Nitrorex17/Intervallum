@@ -13,6 +13,20 @@ const CustomCursor: React.FC<CursorProps> = ({ initialPosition, initialRotation,
     const [isOverInput, setIsOverInput] = useState(false)
     const router = useRouter()
     const cursorRef = useRef<HTMLDivElement>(null)
+    const audioRef = useRef<HTMLAudioElement | null>(null)
+
+    useEffect(() => {
+        // Create the audio element and load the MP3 file
+        audioRef.current = new Audio('@/components/8BitSnare.wav')
+        audioRef.current.load()
+    }, [])
+
+    const playSound = () => {
+        if (audioRef.current) {
+            audioRef.current.currentTime = 0 // Reset to start of the audio
+            audioRef.current.play().catch(error => console.error("Error playing audio:", error))
+        }
+    }
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -38,10 +52,12 @@ const CustomCursor: React.FC<CursorProps> = ({ initialPosition, initialRotation,
                     setRotation(prev => (prev + rotateAmount) % 360)
                     break
                 case 'ENTER':
-                    if (isOverInput && attemptCount >= 5) { // Update to use the state
-                        inputRef?.current?.focus()
+                    if (isOverInput) {
+                        playSound()
+                        if (attemptCount >= 5) {
+                            inputRef?.current?.focus()
+                        }
                     }
-                    break
             }
         }
 
