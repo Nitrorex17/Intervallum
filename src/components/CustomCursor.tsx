@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { CursorProps } from '@/components/types'
+import sound from '../components/8BitSnare.wav'
+const audio = new Audio(sound)
 
 const moveDistance = 5
 const rotateAmount = 5
@@ -14,19 +16,6 @@ const CustomCursor: React.FC<CursorProps> = ({ initialPosition, initialRotation,
     const router = useRouter()
     const cursorRef = useRef<HTMLDivElement>(null)
     const audioRef = useRef<HTMLAudioElement | null>(null)
-
-    useEffect(() => {
-        // Create the audio element and load the MP3 file
-        audioRef.current = new Audio('@/components/8BitSnare.wav')
-        audioRef.current.load()
-    }, [])
-
-    const playSound = () => {
-        if (audioRef.current) {
-            audioRef.current.currentTime = 0 // Reset to start of the audio
-            audioRef.current.play().catch(error => console.error("Error playing audio:", error))
-        }
-    }
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -53,7 +42,7 @@ const CustomCursor: React.FC<CursorProps> = ({ initialPosition, initialRotation,
                     break
                 case 'ENTER':
                     if (isOverInput) {
-                        playSound()
+                        audio.play()
                         if (attemptCount >= 5) {
                             inputRef?.current?.focus()
                         }
