@@ -19,13 +19,7 @@ export default function Home() {
     const [darkness, setDarkness] = useState(0)
     const [fontSize, setFontSize] = useState(24)
     const [showEnd, setShowEnd] = useState(false)
-    const [showError, setShowError] = useState(false)
-
-    useEffect(() => {
-        if (username.toLowerCase() == 'the nameless' && password == "Password") {
-            setShowButton(true)
-        }
-    }, [username, password])
+    const inputRef = useRef<HTMLInputElement>(null)
 
     const transitions : Transitions = {
         top: "N",
@@ -34,13 +28,29 @@ export default function Home() {
         right: "E",
     }
 
-    const handleButtonClick = () => {
-        setClicks((prev) => prev + 1)
-        setDarkness((prev) => prev + 0.14)
-        setFontSize((prev) => prev - 0.2)
+    useEffect(() => {
+        if (username.toLowerCase() == 'the nameless' && password == "Password") {
+            setShowButton(true)
+        }
+    }, [username, password])
 
-        if (clicks >= 7) {
-            setShowEnd(true)
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            window.addEventListener('keydown', handleKeyDown)
+            return () => window.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [clicks])
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Enter' && inputRef.current) {
+            setClicks((prev) => prev + 1)
+            setDarkness((prev) => prev + 0.14)
+            setFontSize((prev) => prev - 0.2)
+
+            if (clicks == 5) {
+                setShowEnd(true)
+                setShowButton(false)
+            }
         }
     }
 
@@ -60,12 +70,10 @@ export default function Home() {
             )}
 
             {showButton && (
-                <button onClick={handleButtonClick} className="bg-white text-black rounded transition-colors duration-200" style={{ pointerEvents: 'none' }}>
-                    Proceed.
-                </button>
+                <input ref={inputRef} type="text" value={"Proceed."} onChange={() => {}} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2 border-2 border-black rounded text-black font-custom" disabled={true}/>
             )}
             
-            <CustomCursor initialPosition={{ x: x || (window.innerWidth / 2), y: y || (window.innerHeight / 2) }} initialRotation={rotation} transitions={transitions}/>
+            <CustomCursor initialPosition={{ x: x || (window.innerWidth / 2), y: y || (window.innerHeight / 2) }} initialRotation={rotation} transitions={transitions} attemptCount={clicks}/>
         </div>
     )
 }
