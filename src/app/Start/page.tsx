@@ -72,7 +72,7 @@ export default function Home() {
                 <input ref={inputRef} type="text" value={"Proceed."} onChange={() => {}} className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-2 border-2 border-black rounded text-black font-custom" disabled={true}/>
             )}
             
-            <div className="absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none" style={{ darkness }}></div>
+            <div className="absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none" style={{ opacity: darkness }}></div>
             <CustomCursor initialPosition={{ x: x || (window.innerWidth / 2), y: y || (window.innerHeight / 2) }} initialRotation={rotation} transitions={transitions} attemptCount={clicks}/>
         </div>
     )
