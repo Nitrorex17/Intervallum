@@ -55,7 +55,7 @@ export default function Home() {
     }
 
     return (
-        <div className="relative w-screen h-screen bg-white">
+        <div className="relative w-screen h-screen bg-black">
             <h2 className="absolute top-8 left-8 text-2xl font-bold text-white z-10"> </h2>
             
             {showEnd ? (

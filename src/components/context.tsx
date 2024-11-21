@@ -12,8 +12,8 @@ interface ContextType {
 const LoginContext = createContext<ContextType>({username: "", setUsername: () => {}, password: "", setPassword: () => {}})
 
 export function LoginProvider({ children } : { children: ReactNode }) {
-    const [username, setUsername] = useState<string>("the nameless")
-    const [password, setPassword] = useState<string>("Password")
+    const [username, setUsername] = useState<string>("")
+    const [password, setPassword] = useState<string>("")
 
     return (
         <LoginContext.Provider value={{ username, setUsername, password, setPassword }}>
