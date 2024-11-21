@@ -19,6 +19,7 @@ export default function Home() {
     const [darkness, setDarkness] = useState(0)
     const [fontSize, setFontSize] = useState(24)
     const [showEnd, setShowEnd] = useState(false)
+    const [showError, setShowError] = useState(false)
     const inputRef = useRef<HTMLInputElement>(null)
 
     const transitions : Transitions = {
@@ -43,11 +44,13 @@ export default function Home() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
         if (event.key === 'Enter' && inputRef.current) {
+            setShowError(true)
             setClicks((prev) => prev + 1)
             setDarkness((prev) => prev + 0.14)
             setFontSize((prev) => prev - 3.25)
 
             if (clicks == 5) {
+                setShowError(false)
                 setShowEnd(true)
                 setShowButton(false)
             }
@@ -58,11 +61,13 @@ export default function Home() {
         <div className="relative w-screen h-screen bg-black">
             <h2 className="absolute top-8 left-8 text-2xl font-bold text-white z-10"> </h2>
             
-            {showEnd ? (
+            {showEnd ?? (
                 <div className="absolute top-1/3 left-1/2 transform -translate-x-1/2 text-5xl text-white font-custom z-20">
                     Welcome to Vallum.
                 </div>
-            ) : (
+            )}
+
+            {showError && (
                 <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 text-white font-custom" style={{ fontSize: `${fontSize}px` }}>
                     Error. Impossible Action.
                 </div>

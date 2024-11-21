@@ -3,8 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import type { CursorProps } from '@/components/types'
-import sound from '../components/8BitSnare.wav'
-const audio = new Audio(sound)
 
 const moveDistance = 5
 const rotateAmount = 5
@@ -42,7 +40,6 @@ const CustomCursor: React.FC<CursorProps> = ({ initialPosition, initialRotation,
                     break
                 case 'ENTER':
                     if (isOverInput) {
-                        audio.play()
                         if (attemptCount >= 5) {
                             inputRef?.current?.focus()
                         }
