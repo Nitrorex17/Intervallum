@@ -15,7 +15,7 @@ export default function Home() {
 
     const { username, password } = useLogin()
     const [showButton, setShowButton] = useState(false)
-    const [clicks, setClicks] = useState(0)
+    const [clicks, setClicks] = useState(-2)
     const [darkness, setDarkness] = useState(0)
     const [fontSize, setFontSize] = useState(24)
     const [showEnd, setShowEnd] = useState(false)
@@ -45,7 +45,7 @@ export default function Home() {
         if (event.key === 'Enter' && inputRef.current) {
             setClicks((prev) => prev + 1)
             setDarkness((prev) => prev + 0.14)
-            setFontSize((prev) => prev - 2)
+            setFontSize((prev) => prev - 3.25)
 
             if (clicks == 5) {
                 setShowEnd(true)
@@ -56,7 +56,7 @@ export default function Home() {
 
     return (
         <div className="relative w-screen h-screen bg-black">
-            <div className="absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none" style={{ opacity: darkness }}></div>
+            <div className="absolute inset-0 bg-black transition-opacity duration-500 pointer-events-none" style={{ opacity: 100 }}></div>
             <h2 className="absolute top-8 left-8 text-2xl font-bold text-white z-10"> </h2>
             
             {showEnd ? (
