@@ -68,7 +68,7 @@ export default function Home() {
 
             {showError && (
                 <div className="absolute bottom-1/4 left-1/2 transform -translate-x-1/2 text-white font-custom" style={{ fontSize: `${fontSize}px` }}>
-                    Error. Impossible Action.
+                    Error. Impossible Action. Proceed.
                 </div>
             )}
 
